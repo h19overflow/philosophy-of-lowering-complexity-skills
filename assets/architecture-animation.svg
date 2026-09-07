@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 380" width="100%" height="100%">
+  <defs>
+    <style>
+      @keyframes dashFlow {
+        from { stroke-dashoffset: 40; }
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes reverseDash {
+        from { stroke-dashoffset: 0; }
+        to { stroke-dashoffset: 40; }
+      }
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.4; r: 4px; }
+        50% { opacity: 0.9; r: 6px; }
+      }
+      @keyframes radarSweep {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes badgeBlink {
+        0%, 100% { opacity: 0.8; }
+        50% { opacity: 0.3; }
+      }
+      .bg-panel { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .sub-panel { fill: #161b22; stroke: #30363d; stroke-width: 1; rx: 8px; }
+      .header-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; }
+      .tag-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 500; }
+      .body-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 12px; }
+      .flow-chaotic { stroke: #f85149; stroke-width: 1.5; stroke-dasharray: 4, 4; fill: none; animation: dashFlow 2s linear infinite; }
+      .flow-chaotic-alt { stroke: #d29922; stroke-width: 1.5; stroke-dasharray: 3, 3; fill: none; animation: reverseDash 1.6s linear infinite; }
+      .flow-ordered { stroke: #58a6ff; stroke-width: 2; stroke-dasharray: 6, 6; fill: none; animation: dashFlow 2s linear infinite; }
+      .flow-success { stroke: #3fb950; stroke-width: 2; stroke-dasharray: 6, 6; fill: none; animation: dashFlow 1.8s linear infinite; }
+      .pulse-node-red { fill: #f85149; animation: pulseGlow 2s infinite ease-in-out; }
+      .pulse-node-blue { fill: #58a6ff; animation: pulseGlow 2s infinite ease-in-out; }
+      .pulse-node-green { fill: #3fb950; animation: pulseGlow 1.5s infinite ease-in-out; }
+      .radar-arm { transform-origin: 770px 170px; animation: radarSweep 5s linear infinite; }
+    </style>
+
+    <linearGradient id="deepGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1f6feb" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#238636" stop-opacity="0.12"/>
+    </linearGradient>
+
+    <linearGradient id="chaosGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#da3633" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#d29922" stop-opacity="0.08"/>
+    </linearGradient>
+
+    <radialGradient id="radarBloom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#58a6ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Canvas Base -->
+  <rect width="880" height="380" rx="14" fill="#090d13" stroke="#21262d" stroke-width="1.5"/>
+
+  <!-- Top Status Bar -->
+  <path d="M 0 14 C 0 6.268 6.268 0 14 0 L 866 0 C 873.732 0 880 6.268 880 14 L 880 42 L 0 42 Z" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <circle cx="24" cy="21" r="5" fill="#f85149"/>
+  <circle cx="40" cy="21" r="5" fill="#d29922"/>
+  <circle cx="56" cy="21" r="5" fill="#3fb950"/>
+  <text x="76" y="25" fill="#8b949e" class="header-title" font-size="12">AI Cognitive Load vs. Philosophy of Lowering Complexity</text>
+
+  <g transform="translate(710, 13)">
+    <rect width="150" height="18" rx="9" fill="#1f6feb" fill-opacity="0.2" stroke="#388bfd" stroke-width="0.8"/>
+    <circle cx="10" cy="9" r="3.5" fill="#388bfd" style="animation: badgeBlink 1.5s infinite;"/>
+    <text x="20" y="13" fill="#58a6ff" class="tag-text" font-size="10">Active Constraint Engine</text>
+  </g>
+
+  <!-- ==================== LEFT PANEL: CHAOTIC AI GENERATION ==================== -->
+  <rect x="20" y="58" width="395" height="302" class="bg-panel" fill="url(#chaosGrad)"/>
+
+  <!-- Left Header -->
+  <rect x="35" y="72" width="180" height="24" rx="12" fill="#da3633" fill-opacity="0.2" stroke="#f85149" stroke-width="0.8"/>
+  <text x="47" y="88" fill="#ff7b72" class="tag-text">UNCONSTRAINED AI AGENT</text>
+  <text x="225" y="88" fill="#8b949e" class="tag-text">High Cognitive Load</text>
+
+  <!-- Shallow Wrapper Box 1 -->
+  <rect x="40" y="115" width="165" height="42" class="sub-panel" stroke="#d29922" stroke-dasharray="3,2"/>
+  <text x="50" y="132" fill="#e3b341" class="body-text" font-weight="600">Shallow Wrapper</text>
+  <text x="50" y="147" fill="#8b949e" class="tag-text">Pass-through controller</text>
+
+  <!-- Shallow Wrapper Box 2 -->
+  <rect x="235" y="115" width="160" height="42" class="sub-panel" stroke="#d29922" stroke-dasharray="3,2"/>
+  <text x="245" y="132" fill="#e3b341" class="body-text" font-weight="600">Leaky Adapter</text>
+  <text x="245" y="147" fill="#8b949e" class="tag-text">Exposes internal SQL row</text>
+
+  <!-- Fragmented micro helpers -->
+  <rect x="40" y="195" width="95" height="36" class="sub-panel" stroke="#f85149"/>
+  <text x="48" y="212" fill="#ff7b72" class="tag-text" font-weight="600">fn parse_id()</text>
+  <text x="48" y="224" fill="#8b949e" font-size="9">3 lines</text>
+
+  <rect x="145" y="195" width="105" height="36" class="sub-panel" stroke="#f85149"/>
+  <text x="153" y="212" fill="#ff7b72" class="tag-text" font-weight="600">fn validate_val()</text>
+  <text x="153" y="224" fill="#8b949e" font-size="9">4 lines</text>
+
+  <rect x="260" y="195" width="135" height="36" class="sub-panel" stroke="#f85149"/>
+  <text x="268" y="212" fill="#ff7b72" class="tag-text" font-weight="600">fn check_duplicate()</text>
+  <text x="268" y="224" fill="#8b949e" font-size="9">Duplicated invariant</text>
+
+  <!-- Tactical Patch box -->
+  <rect x="40" y="270" width="355" height="46" class="sub-panel" stroke="#f85149" stroke-width="1.2"/>
+  <text x="52" y="290" fill="#f85149" class="body-text" font-weight="600">Tactical Patch (Change Amplification)</text>
+  <text x="52" y="306" fill="#8b949e" class="tag-text">Trivial modification requires edits across 6 coupled call sites</text>
+
+  <!-- Chaotic Connecting Paths -->
+  <path d="M 120 157 L 90 195" class="flow-chaotic"/>
+  <path d="M 140 157 L 180 195" class="flow-chaotic"/>
+  <path d="M 290 157 L 310 195" class="flow-chaotic-alt"/>
+  <path d="M 200 135 L 235 135" class="flow-chaotic"/>
+  <path d="M 90 231 L 90 270" class="flow-chaotic"/>
+  <path d="M 195 231 L 220 270" class="flow-chaotic-alt"/>
+  <path d="M 320 231 L 330 270" class="flow-chaotic"/>
+
+  <circle cx="90" cy="195" class="pulse-node-red"/>
+  <circle cx="180" cy="195" class="pulse-node-red"/>
+  <circle cx="310" cy="195" class="pulse-node-red"/>
+
+  <!-- Danger Tag Footer -->
+  <text x="40" y="344" fill="#f85149" class="tag-text">⚠️ High context churn • Unknown unknowns • Fragmented flow</text>
+
+  <!-- ==================== RIGHT PANEL: GOVERNED ARCHITECTURE ==================== -->
+  <rect x="440" y="58" width="420" height="302" class="bg-panel" fill="url(#deepGrad)"/>
+
+  <!-- Right Header -->
+  <rect x="455" y="72" width="205" height="24" rx="12" fill="#238636" fill-opacity="0.2" stroke="#3fb950" stroke-width="0.8"/>
+  <text x="467" y="88" fill="#56d364" class="tag-text">PHILOSOPHY SKILLS + GRAPHIFY</text>
+  <text x="670" y="88" fill="#8b949e" class="tag-text">Zero Context Waste</text>
+
+  <!-- Deep Module: Interface Top Bar -->
+  <rect x="460" y="115" width="230" height="34" rx="6" fill="#1f6feb" fill-opacity="0.25" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="472" y="132" fill="#79c0ff" class="body-text" font-weight="600">Deep Interface (Simple &amp; Cohesive)</text>
+  <text x="472" y="144" fill="#8b949e" font-size="9.5">`executeOrder(intent)` — caller knows zero internals</text>
+
+  <!-- Deep Module: Hidden Implementation Block -->
+  <rect x="460" y="156" width="230" height="158" rx="6" class="sub-panel" stroke="#238636" stroke-width="1.2"/>
+  <text x="472" y="176" fill="#3fb950" class="tag-text" font-weight="600">Hidden Implementation Details</text>
+
+  <!-- Inner components of deep module -->
+  <rect x="472" y="186" width="206" height="30" rx="4" fill="#0d1117" stroke="#30363d"/>
+  <text x="480" y="202" fill="#c9d1d9" class="tag-text">Shared Primitive (`OrderRecord` invariant)</text>
+  <text x="480" y="212" fill="#8b949e" font-size="9">Single authoritative owner • No sync bugs</text>
+
+  <rect x="472" y="222" width="206" height="30" rx="4" fill="#0d1117" stroke="#30363d"/>
+  <text x="480" y="238" fill="#c9d1d9" class="tag-text">Joined Sequential Logic</text>
+  <text x="480" y="248" fill="#8b949e" font-size="9">Cohesive flow • Zero artificial 3-line helpers</text>
+
+  <rect x="472" y="258" width="206" height="30" rx="4" fill="#0d1117" stroke="#30363d"/>
+  <text x="480" y="274" fill="#c9d1d9" class="tag-text">Complexity Review Audit Gate</text>
+  <text x="480" y="284" fill="#8b949e" font-size="9">Strategic guardrails block change amplification</text>
+
+  <path d="M 575 149 L 575 186" class="flow-success"/>
+  <circle cx="575" cy="186" class="pulse-node-green"/>
+
+  <!-- Graphify Radar / Knowledge Graph Visualizer -->
+  <g transform="translate(705, 115)">
+    <rect width="140" height="199" rx="8" class="sub-panel" stroke="#58a6ff" stroke-width="1.2"/>
+    <text x="14" y="22" fill="#79c0ff" class="tag-text" font-weight="600">graphify Topology</text>
+    <text x="14" y="35" fill="#8b949e" font-size="9">AST Graph &amp; God Nodes</text>
+
+    <!-- Radar circle -->
+    <circle cx="70" cy="105" r="48" fill="url(#radarBloom)" stroke="#30363d" stroke-dasharray="2,2"/>
+    <circle cx="70" cy="105" r="30" fill="none" stroke="#30363d" stroke-dasharray="2,2"/>
+    <circle cx="70" cy="105" r="14" fill="none" stroke="#30363d"/>
+
+    <!-- Radar arm sweep -->
+    <line x1="70" y1="105" x2="70" y2="57" stroke="#58a6ff" stroke-width="1.5" class="radar-arm" opacity="0.8"/>
+
+    <!-- Nodes on graph -->
+    <circle cx="58" cy="90" r="4" class="pulse-node-blue"/>
+    <circle cx="85" cy="80" r="3" fill="#3fb950"/>
+    <circle cx="80" cy="125" r="5" fill="#58a6ff"/>
+    <circle cx="45" cy="120" r="3" fill="#bc8cff"/>
+    <circle cx="70" cy="105" r="4" fill="#f0883e"/>
+
+    <!-- Edges -->
+    <line x1="58" y1="90" x2="70" y2="105" stroke="#388bfd" stroke-width="1" opacity="0.6"/>
+    <line x1="85" y1="80" x2="70" y2="105" stroke="#388bfd" stroke-width="1" opacity="0.6"/>
+    <line x1="80" y1="125" x2="70" y2="105" stroke="#388bfd" stroke-width="1" opacity="0.6"/>
+    <line x1="45" y1="120" x2="70" y2="105" stroke="#388bfd" stroke-width="1" opacity="0.6"/>
+
+    <text x="14" y="174" fill="#8b949e" font-size="9">Deterministic Path</text>
+    <text x="14" y="187" fill="#3fb950" class="tag-text">Zero Token Churn</text>
+  </g>
+
+  <!-- Inter-module connector -->
+  <path d="M 690 190 L 705 190" class="flow-ordered"/>
+  <circle cx="705" cy="190" class="pulse-node-blue"/>
+
+  <!-- Success Tag Footer -->
+  <text x="460" y="344" fill="#3fb950" class="tag-text">✓ High locality • Deep information hiding • Structural determinism</text>
+</svg>

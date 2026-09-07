@@ -2,6 +2,9 @@
 
 A collection of agent skills derived from John Ousterhout's *A Philosophy of Software Design* alongside **graphify**, engineered to constrain software complexity, eliminate shallow abstractions, and manage cognitive load when collaborating with AI coding agents.
 
+<p align="center">
+  <img src="./assets/architecture-animation.svg" alt="AI Cognitive Load vs Philosophy of Lowering Complexity" width="100%" />
+</p>
 ---
 
 ## The AI Complexity Crisis: Why These Skills Exist
@@ -50,6 +53,24 @@ These skills invert the default bias of AI agents: forcing **deep modules**, **u
 - **Core Principle:** Deterministic extraction and query of codebase topology, dependency graphs, god nodes, and call paths.
 - **Why It Matters for AI:** When navigating non-trivial codebases, AI agents waste tokens and context window capacity through probabilistic grep searches and ungrounded file browsing. `graphify` builds a persistent AST-backed knowledge graph with community detection. It allows agents to trace call paths, evaluate blast radiuses, identify god-node coupling, and understand system boundaries deterministically before editing.
 
+
+---
+
+## Agent Workflow Pipeline
+
+How these five skills interlock during an autonomous agent coding session:
+
+```mermaid
+flowchart TD
+    A[User Request / Feature Ask] --> B[graphify]
+    B -->|Map AST, Call Paths & God Nodes| C[module-boundary-design]
+    C -->|Define Deep Interfaces & Hide State| D[shared-information-design]
+    D -->|Consolidate Single Authoritative Primitives| E[split-or-join-functions]
+    E -->|Join Conjoined Logic & Preserve Locality| F[Implementation]
+    F --> G[complexity-review]
+    G -->|Pass: Zero Change Amplification| H[Clean Delivery]
+    G -->|Fail: Shallow Wrapper or Leaky Abstraction| C
+```
 ---
 
 ## Structure
