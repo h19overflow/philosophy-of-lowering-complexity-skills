@@ -1,7 +1,10 @@
 # Philosophy of Lowering Complexity Skills
 
-A collection of agent skills derived from John Ousterhout's *A Philosophy of Software Design* alongside **graphify**, engineered to constrain software complexity, eliminate shallow abstractions, and manage cognitive load when collaborating with AI coding agents.
+<p align="center">
+  <img src="./assets/showcase.png" alt="Philosophy of Lowering Complexity Skills" width="100%" />
+</p>
 
+A collection of agent skills derived from John Ousterhout's *A Philosophy of Software Design* alongside **graphify**, engineered to constrain software complexity, eliminate shallow abstractions, and manage cognitive load when collaborating with AI coding agents.
 <p align="center">
   <img src="./assets/architecture-animation.svg" alt="AI Cognitive Load vs Philosophy of Lowering Complexity" width="100%" />
 </p>
