@@ -85,6 +85,7 @@ flowchart TD
 
 ```text
 .
+├── AGENTS.md                  # Global execution policy, design rules & OMP harness configs
 ├── complexity-review/          # Complexity auditing and change amplification detection
 │   └── SKILL.md
 ├── exception-design/           # Error semantics, masking, and boundary aggregation
@@ -109,3 +110,4 @@ Compatible with agent harnesses supporting the standard skill specification (Oh 
 
 - Copy or symlink any skill directory into your harness's skills folder (e.g. `~/.omp/agent/skills/` or `.omp/skills/`).
 - Invoke the skill during design, implementation, or code review phases to enforce architectural quality on AI-generated pull requests and code modifications.
+- See [AGENTS.md](./AGENTS.md) for the global agent execution policy, Ousterhout software-design complexity rules, and recommended Oh My Pi harness configuration (`config.yml` and `APPEND_SYSTEM.md`).
