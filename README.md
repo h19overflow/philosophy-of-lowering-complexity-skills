@@ -50,29 +50,34 @@ These skills invert the default bias of AI agents: forcing **deep modules**, **u
 - **Core Principle:** Functions should be split only when doing so isolates independent, general-purpose sub-tasks. Fragmenting tightly coupled sequential logic into conjoined single-use helpers inflates cognitive load and obscures data flow.
 - **Why It Matters for AI:** LLMs are conditioned on rules like "functions must not exceed 10–20 lines." In practice, this produces fragmented codebases where readers must mentally reconstruct call trees across five functions just to understand one linear algorithm. This skill guides the agent to join conjoined methods, keep sequential logic together, and preserve context locality.
 
-### 5. `graphify`
+### 5. `exception-design`
+*Based on Chapter 10: Define Errors Out of Existence.*
+
+- **Core Principle:** Design error semantics so callers handle the smallest possible number of exceptional conditions: define errors out of existence, mask recoverable failures, aggregate at boundaries, and fail fast on corruption.
+- **Why It Matters for AI:** AI models tend to over-handle exceptions by creating granular custom exception hierarchies and scattering `try/catch` boilerplate across callers, or alternatively, by letting low-level transport/SDK exceptions leak through domain boundaries. This skill forces agents to design error semantics intentionally—turning exceptions into normal cases, handling recoverable errors internally, and aggregating failure modes at clean architectural boundaries.
+
+### 6. `graphify`
 *Structural Codebase Intelligence and Knowledge Graph Construction.*
 
 - **Core Principle:** Deterministic extraction and query of codebase topology, dependency graphs, god nodes, and call paths.
 - **Why It Matters for AI:** When navigating non-trivial codebases, AI agents waste tokens and context window capacity through probabilistic grep searches and ungrounded file browsing. `graphify` builds a persistent AST-backed knowledge graph with community detection. It allows agents to trace call paths, evaluate blast radiuses, identify god-node coupling, and understand system boundaries deterministically before editing.
-
-
 ---
 
 ## Agent Workflow Pipeline
 
-How these five skills interlock during an autonomous agent coding session:
+How these six skills interlock during an autonomous agent coding session:
 
 ```mermaid
 flowchart TD
     A[User Request / Feature Ask] --> B[graphify]
     B -->|Map AST, Call Paths & God Nodes| C[module-boundary-design]
     C -->|Define Deep Interfaces & Hide State| D[shared-information-design]
-    D -->|Consolidate Single Authoritative Primitives| E[split-or-join-functions]
-    E -->|Join Conjoined Logic & Preserve Locality| F[Implementation]
-    F --> G[complexity-review]
-    G -->|Pass: Zero Change Amplification| H[Clean Delivery]
-    G -->|Fail: Shallow Wrapper or Leaky Abstraction| C
+    D -->|Consolidate Single Authoritative Primitives| E[exception-design]
+    E -->|Define Errors Out of Existence & Mask Failures| F[split-or-join-functions]
+    F -->|Join Conjoined Logic & Preserve Locality| G[Implementation]
+    G --> H[complexity-review]
+    H -->|Pass: Zero Change Amplification| I[Clean Delivery]
+    H -->|Fail: Shallow Wrapper or Leaky Abstraction| C
 ```
 ---
 
@@ -81,6 +86,8 @@ flowchart TD
 ```text
 .
 ├── complexity-review/          # Complexity auditing and change amplification detection
+│   └── SKILL.md
+├── exception-design/           # Error semantics, masking, and boundary aggregation
 │   └── SKILL.md
 ├── module-boundary-design/     # Deep module architecture and information hiding
 │   ├── references/
@@ -94,7 +101,6 @@ flowchart TD
     ├── references/
     └── SKILL.md
 ```
-
 ---
 
 ## Usage

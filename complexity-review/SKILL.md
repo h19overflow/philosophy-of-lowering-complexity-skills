@@ -48,7 +48,7 @@ Evaluate the affected design surface against these 12 questions:
 │ 5. Duplicated Knowledge    → Is policy living in 2 places?  │
 │ 6. Parallel Drift          → Do test & prod duplicate math? │
 │ 7. Framework Semantics     → Are framework features used?   │
-│ 8. Interface Leakage       → Does infra leak into domain?   │
+│ 8. Interface/Exception Leakage → Infra or exceptions leaking? │
 │ 9. Speculative Extensibility→ Unused factories / strategies?│
 │ 10. Concept Budget         → Did new concepts pay their way?│
 │ 11. Change Amplification   → Would future changes ripple?   │
@@ -62,12 +62,12 @@ Evaluate the affected design surface against these 12 questions:
 4. **Temporal Decomposition**: Was code divided into separate functions, classes, or nodes solely because operations occur in chronological sequence ("first, then, next, finally")?
 5. **Duplicated Knowledge**: Does the same business rule, schema parsing, coordinate format, or invariant exist in multiple places?
 6. **Parallel Implementation Drift**: If parallel mechanisms exist (e.g. PostgreSQL vs in-memory, real vs fake provider), are they duplicating algorithms (such as ranking formulas or scoring math) instead of sharing a single policy function?
-7. **Framework Semantics**: If an architectural framework was introduced (e.g. LangGraph, Temporal, Celery), are its runtime semantics (cycles, durable checkpoints, human-in-the-loop pauses, independent retries) genuinely required, or is it a simple deterministic sequence that belongs in procedural code?
-8. **Interface Leakage**: Do database query details, vendor SDK types, HTTP headers, or transport exceptions leak into domain logic?
-9. **Speculative Extensibility**: Were factories, provider registries, generic protocols, or configuration options built for hypothetical future requirements?
-10. **Concept Budget**: Did the total number of new types, files, and names grow more than the delivered capability justified?
+7. **Framework & Event Semantics**: If an architectural framework or event-driven integration (e.g. LangGraph, Temporal, Celery, Kafka, event buses) was introduced, are its runtime semantics (cycles, durable checkpoints, independent failure domains, fanout) genuinely required, or does it gratuitously invert control flow for a linear flow that belongs in procedural code? Is distributed tracing present for event systems?
+8. **Interface & Exception Leakage**: Do database query details, vendor SDK types, HTTP headers, or transport exceptions leak into domain logic? Were recoverable errors masked inside deep modules, or defined out of existence per `skill://exception-design`?
+9. **Speculative Extensibility & Patterns**: Were factories, provider registries, multi-class strategy patterns, or implementation inheritance built for hypothetical requirements or fewer than 3 variants? Does code compose behavior rather than inherit implementation?
+10. **Concept Budget & Obvious Types**: Did the total number of new types, files, and names grow more than the delivered capability justified? Are generic containers (`Pair`, `Tuple2`, `Map.Entry`, untyped dicts) avoided in favor of explicit named domain records?
 11. **Change Amplification**: Will a likely future requirement change force synchronized edits across multiple files?
-12. **Simplification Potential**: Would a future engineer understand this feature faster if some files, wrappers, or classes were combined or deleted?
+12. **Simplification & Performance Potential**: Would a future engineer understand this feature faster if wrappers were collapsed? Is the hot path clean and simple rather than weighed down by premature optimization or speculative caching? Do tests verify observable behavior without pinning internal wiring or mock counts?
 
 ---
 

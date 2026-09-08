@@ -112,6 +112,12 @@ Identify the fundamental shared concept upon which both concepts depend:
 - Neither depends on the other.
 - Both depend cleanly on `SourceLocation`, which enforces coordinate formatting once.
 
+
+### Named Domain Types Over Generic Containers
+Generic containers (`Pair<A, B>`, `Tuple2`, `Map.Entry<K, V>`, `tuple[str, int]`, untyped dicts/hashmaps) force callers to memorize positional indexes (`.getLeft()`, `item[0]`, `.getKey()`). The reader cannot tell what the data represents without reading upstream code.
+- **Rule**: Ban generic pairs/tuples for domain data.
+- **Remedy**: Define a lightweight named domain record, struct, or interface (e.g. `record UserScore(String username, int points)` or `@dataclass class UserScore`).
+- **Why**: Modern languages make records/structs syntactically free. A named domain type documents intent at both declaration and call site without requiring explanatory comments.
 ---
 
 ## False DRY: When NOT to Combine

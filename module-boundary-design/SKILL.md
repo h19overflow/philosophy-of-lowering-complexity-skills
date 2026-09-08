@@ -98,6 +98,8 @@ Avoid both extremes:
 - Can a caller use this component effectively by reading only its interface documentation?
 - Can an engineer safely modify the internal implementation without inspecting every call site?
 
+- **Interface vs Implementation Comments**: Interface documentation tells users *what* the module provides and *how to use it*; implementation comments tell maintainers *how it works*. If interface comments must explain internal mechanics to be usable, or if callers must read the code to use the interface, the abstraction is leaky or shallow.
+- **Types and Names Over Comments**: Encode units (`timeoutMs`, `Duration`), boundaries (`startInclusive`, `endExclusive`), and constraints in types and names rather than prose comments. Comments only earn their place when the code genuinely cannot carry the information (why not the obvious thing, cross-module invariants, or historical context).
 *Rule: If understanding Component A requires reading Component B, they are conjoined. Separating them scatters complexity. Keep them together.*
 
 ### Question 5 — Does the Boundary Create Present Value?
@@ -165,6 +167,19 @@ Ordinary Python / TypeScript        LangGraph Justified
 
 *Rule: Judge semantics, not topology. A DAG may justify a workflow engine if it requires durable checkpoints and distributed retries; a graph without operational needs belongs in ordinary procedural code.*
 
+### Evaluating Event-Driven Architectures & Pub/Sub
+Event-driven code inverts control flow and scatters the call graph across runtime message handlers (e.g. Spring `@EventListener`, Kafka topics, Redis streams). Reading source code alone no longer reveals what executes next.
+- **Event-driven decoupling is justified when:**
+  1. **Autonomous Lifecycles**: Publishers and subscribers run on independent failure domains, deployment schedules, or scaling tiers.
+  2. **True Asynchrony**: The publisher's response must not block on subscriber processing.
+  3. **One-to-Many Fanout**: Multiple independent systems consume the same business fact without the producer coupling to them.
+- **Event-driven decoupling is NOT justified when:**
+  - The flow is a linear sequence where ordering matters (e.g., checkout steps, validation -> processing).
+  - The subscriber must succeed for the producer's transaction to be valid.
+  - An in-memory event bus is used merely to avoid calling a method directly.
+- **Mandatory Tracing Invariant**:
+  Any event-driven system must carry distributed trace context (`traceId`, `correlationId`). An untraced event-driven system is unobservable and unmaintainable.
+
 ---
 
 ## Explicit Anti-Dogma Rules
@@ -174,6 +189,9 @@ Ordinary Python / TypeScript        LangGraph Justified
 3. **One implementation does not make an interface premature**: An abstraction with one implementation is fully justified if it hides significant current complexity (e.g., `KnowledgeStore` hiding pgvector and tsvector SQL).
 4. **Abstract present complexity, not imagined variation**: Build abstractions for complexity that exists today. Do NOT build factories, registries, or strategy frameworks for hypothetical future providers.
 5. **"Every boundary must earn its existence" does not mean "avoid boundaries"**: Strong, deep boundaries are essential for maintainability. The rule simply demands that boundaries provide real information hiding or operational isolation.
+6. **Prefer composition over implementation inheritance**: Implementation inheritance tightly couples subclasses to parent internals and easily breaks domain invariants (the classic `Stack extends Vector` flaw where Stack exposes `.add(int, E)` and breaks LIFO). Use interface inheritance for polymorphic contracts and compose behavior.
+7. **Design patterns must earn their place (Rule of Three)**: Write direct procedural branches (like a switch expression or function) first. Extract an architectural pattern (Strategy, Factory, Visitor) only when a third distinct caller or variant appears and measurably benefits.
+8. **Ban shallow getters and setters**: Classes with hand-rolled getters/setters for every field hide nothing and merely widen the surface area. Use immutable records, dataclasses, or properties.
 
 ---
 

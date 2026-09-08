@@ -46,6 +46,11 @@ Before extracting code into a helper function, answer these 8 questions:
 
 Two functions are **conjoined** when understanding either one requires reading both. Conjoined functions scatter a single algorithm across multiple scopes.
 
+### The Two-Sentence Test (Write Comments First)
+When documenting, designing, or naming a function, describe its purpose in one or two concise sentences without using "and", "also", or "additionally". If describing the function requires:
+> *"This function does X, and then Y, and also handles Z"*
+it has multiple conjoined responsibilities wearing a single signature. Split the responsibilities or clarify the single abstraction before writing or shipping code.
+
 ### Warning Signs of Conjoined Functions
 - **Single Caller**: The helper is called from exactly one place.
 - **Caller-Specific State**: The helper reads or mutates variables specifically prepared by its caller.
